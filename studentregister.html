@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Course Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            color: white;
+            background: rgba(44, 62, 80, 0.9); /* Graders Academy color */
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #00cec9; /* Color for Graders Academy text */
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            color: #00cec9;
+        }
+
+        .course-list, .registration-form {
+            margin: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+        }
+        table {
+            width: 700px; 
+        }
+        .course-item {
+            text-align: center;
+        }
+        .course-item img {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .registration-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Graders Academy</h2>
+        <ul>
+            <li><a href="Index.html">Dashboard</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="Course.html">Courses</a></li>
+            <li><a href="studentregister.html">Students</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a href="#">Staffs</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">LogOut</a></li>
+        </ul>
+    </div>
+    <main>
+        <section class="course-list">
+            <h3><i>COURSE CATALOG</i></h3>
+            <br>
+
+            <h2>AVAILABLE COURSES</h2>
+            <table border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <div class="course-item">
+                            <h2>Introduction to Programming</h2>
+                            <img src="programming.webp" alt="Introduction to Programming" class="course-image" width="150px" height="100px">
+                            <p>4 weeks</p>
+                            <button onclick="addToRegistration('Introduction to Programming', 300)">Register</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course-item">
+                            <h2>Web Development</h2>
+                            <img src="webdevelopment.jpg" alt="Web Development" class="course-image" width="100px" height="60px">
+                            <p>8 weeks</p>
+                            <button onclick="addToRegistration('Web Development', 250)">Register</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="course-item">
+                            <h2>Data Science</h2>
+                            <img src="datascience.jpg" alt="Data Science" class="course-image" width="150px" height="100px">
+                            <p>12 weeks</p>
+                            <button onclick="addToRegistration('Data Science', 350)">Register</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course-item">
+                            <h2>Machine Learning</h2>
+                            <img src="machinelearning.jpeg" alt="Machine Learning" class="course-image" width="150px" height="100px">
+                            <p>8 weeks</p>
+                            <button onclick="addToRegistration('Machine Learning', 400)">Register</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="course-item">
+                            <h2>Graphic Design</h2>
+                            <img src="grahicdesign.webp" alt="Graphic Design" class="course-image" width="150px" height="100px">
+                            <p>12 weeks</p>
+                            <button onclick="addToRegistration('Graphic Design', 280)">Register</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="course-item">
+                            <h2>Digital Marketing</h2>
+                            <img src="digitalmarketing.jfif" alt="Digital Marketing" class="course-image" width="150px" height="100px">
+                            <p>6 weeks</p>
+                            <button onclick="addToRegistration('Digital Marketing', 220)">Register</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="registration-form">
+            <h2>Your Registration</h2>
+            <form id="registrationForm">
+                <div id="registeredCourses">
+                    <ul></ul>
+                </div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <button type="submit">Submit Registration</button>
+            </form>
+            <p id="confirmation" class="hidden"></p>
+        </section>
+    </main>
+
+    <!--<footer>
+        <p>&copy; 2024 Course Registration Website</p>
+    </footer>-->
+
+    <script>
+        let registration = [];
+
+        function addToRegistration(courseName, coursePrice) {
+            registration.push({ name: courseName, price: coursePrice });
+            updateRegisteredCourses();
+        }
+
+        function updateRegisteredCourses() {
+            const registeredCourses = document.getElementById('registeredCourses').querySelector('ul');
+            registeredCourses.innerHTML = '';
+
+            registration.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${item.name} - $${item.price}`;
+                registeredCourses.appendChild(listItem);
+            });
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (registration.length === 0) {
+                alert("Please select courses for registration.");
+                return;
+            }
+            alert("Registration submitted successfully!");
+        });
+        
+    </script>
+</body>
+</html>

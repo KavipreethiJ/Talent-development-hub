@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+   
+    <style>
+        /* Simple styles for modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        .modal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Graders Academy</h2>
+        <ul>
+            <li><a href="Index.html">Dashboard</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="Course.html">Courses</a></li>
+            <li><a href="studentregister.html">Students</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a href="#">Staffs</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">LogOut</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="login-buttons">
+                <button class="admin-login" id="adminLoginBtn"> <a href="adminlogin.html">Admin Login</a></button>
+                <button class="student-login" id="studentLoginBtn">Student Login</button>
+            </div>
+        </header>
+
+        <section class="course-section">
+            <h2>Courses</h2>
+            <div class="sort-options">
+                <p>Sort By: <span>All Categories</span></p>
+            </div>
+            <div class="course-container">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <img src="frontendimage.jpg" alt="Course Image">
+                    <div class="course-info">
+                        <p>#Front End Developer</p>
+                        <h3>Meta Tag</h3>
+                        <span class="date">25/8/2023</span>
+                        <div class="details">
+                            <p><i class="fas fa-book"></i> 12 Lessons</p>
+                            <p><i class="fas fa-clock"></i> 1 hr</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <img src="backendimage.jpeg" alt="Course Image">
+                    <div class="course-info">
+                        
+                        <h3>Backend Development</h3>
+                        <span class="date">9/8/2023</span>
+                        <div class="details">
+                            <p><i class="fas fa-book"></i> 12 Lessons</p>
+                            <p><i class="fas fa-clock"></i> 1 hr</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <img src="fullstackimage.jpg" alt="Course Image">
+                    <div class="course-info">
+                        <p>#Back End Developer</p>
+                        <h3>UI/UX</h3>
+                        <span class="date">18/8/2023</span>
+                        <div class="details">
+                            <p><i class="fas fa-book"></i> 12 Lessons</p>
+                            <p><i class="fas fa-clock"></i> 1 hr</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAdminModal">&times;</span>
+            <h2>Admin Login</h2>
+            <form>
+                <label for="adminUsername">Username:</label>
+                <input type="text" id="adminUsername" required><br>
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Login Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeStudentModal">&times;</span>
+            <h2>Student Login</h2>
+            <form>
+                <label for="studentUsername">Username:</label>
+                <input type="text" id="studentUsername" required><br>
+                <label for="studentPassword">Password:</label>
+                <input type="password" id="studentPassword" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the modals
+        var adminModal = document.getElementById("adminModal");
+        var studentModal = document.getElementById("studentModal");
+
+        // Get the buttons that open the modals
+        var adminLoginBtn = document.getElementById("adminLoginBtn");
+        var studentLoginBtn = document.getElementById("studentLoginBtn");
+
+        // Get the <span> elements that close the modals
+        var closeAdminModal = document.getElementById("closeAdminModal");
+        var closeStudentModal = document.getElementById("closeStudentModal");
+
+        // When the user clicks the admin login button, open the modal
+        adminLoginBtn.onclick = function() {
+            adminModal.style.display = "block";
+            adminModal.querySelector('.modal-content').classList.add('show');
+        }
+
+        // When the user clicks the student login button, open the modal
+        studentLoginBtn.onclick = function() {
+            studentModal.style.display = "block";
+            studentModal.querySelector('.modal-content').classList.add('show');
+        }
+
+        // When the user clicks on <span> (x), close the admin modal
+        closeAdminModal.onclick = function() {
+            adminModal.style.display = "none";
+            adminModal.querySelector('.modal-content').classList.remove('show');
+        }
+
+        // When the user clicks on <span> (x), close the student modal
+        closeStudentModal.onclick = function() {
+            studentModal.style.display = "none";
+            studentModal.querySelector('.modal-content').classList.remove('show');
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == adminModal) {
+                adminModal.style.display = "none";
+                adminModal.querySelector('.modal-content').classList.remove('show');
+            } else if (event.target == studentModal) {
+                studentModal.style.display = "none";
+                studentModal.querySelector('.modal-content').classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
